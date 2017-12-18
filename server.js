@@ -2,10 +2,15 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
     
-Object.assign=require('object-assign')
+var bodyParser = require('body-parser');
+
+app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -29,12 +34,10 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
   }
 }
-var db = null,
-    dbDetails = new Object();
+var db = null;
 
 var initDb = function(callback) {
   if (mongoURL == null) return;
-
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
@@ -43,13 +46,7 @@ var initDb = function(callback) {
       callback(err);
       return;
     }
-
     db = conn;
-    dbDetails.databaseName = db.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
-
-    console.log('Connected to MongoDB at: %s', mongoURL);
   });
 };
 
@@ -62,12 +59,12 @@ app.get('/', function (req, res) {
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) {
-        console.log('Error running count. Message:\n'+err);
+        console.log('Error running count. Message:\n' + err);
       }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+      res.sendFile('index.html');
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+    res.sendFile('index.html');
   }
 });
 
