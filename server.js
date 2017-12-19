@@ -87,6 +87,14 @@ initDb(function(err){
 });
 
 app.listen(port, ip);
+
 console.log('Server running on http://%s:%s', ip, port);
+
+console.log('mongoServiceName:', mongoServiceName);
+console.log('mongoHost:', mongoHost);
+console.log('mongoPort:', mongoPort);
+console.log('mongoDatabase:', mongoDatabase);
+console.log('mongoUser:', mongoUser);
+console.log('mongoPassword:', mongoPassword);
 
 module.exports = app ;
