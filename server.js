@@ -1,6 +1,5 @@
 var express = require('express'),
-    app     = express(),
-    morgan  = require('morgan');
+    app     = express();
     
 var bodyParser = require('body-parser');
 
@@ -8,9 +7,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'));
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
