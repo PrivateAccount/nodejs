@@ -87,9 +87,7 @@ app.post('/api/todos', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-	  console.log('Przyszlo do serwera:', req.body);
-	  var inputText = req.body.formData.text;
-    db.collection('todos').insert({ text: inputText, ip: req.ip, date: Date.now() });
+    db.collection('todos').insert({ text: req.body.text, ip: req.ip, date: Date.now() });
   }
 });
 
