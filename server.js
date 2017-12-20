@@ -62,21 +62,11 @@ var initDb = function(callback) {
 };
 
 app.get('/', function (req, res) {
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    var col = db.collection('counts');
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      if (err) {
-        console.log('Error running count. Message:\n' + err);
-      }
-      res.sendFile('index.html');
-    });
-  } else {
-    res.sendFile('index.html');
-  }
+  res.sendFile('index.html');
+});
+
+app.get('/pagecount', function (req, res) {
+  res.send('{ pageCount: 0 }');
 });
 
 app.get('/posts', function (req, res) {
