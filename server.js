@@ -75,7 +75,6 @@ app.get('/api/todos', function (req, res) {
   if (db) {
 	db.collection('todos', function(err, collection) {
 		collection.find().toArray(function(err, items) {
-			console.log(items);
 			res.send(items);
 		});
 	});
@@ -87,7 +86,16 @@ app.post('/api/todos', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('todos').insert({ text: req.body.text, ip: req.ip, date: Date.now() });
+	var myObj = { text: req.body.text, ip: req.ip, date: Date.now() };
+	db.collection('todos').insertOne(myObj, function(err, res) {
+		if (err) throw err;
+		db.collection('todos', function(err, collection) {
+			collection.find().toArray(function(err, items) {
+				res.send(items);
+			});
+		});
+		console.log("1 document inserted");
+    });
   }
 });
 
