@@ -74,7 +74,7 @@ app.get('/api/todos', function (req, res) {
   }
   if (db) {
     db.collection('todos').find(function(err, result) {
-      res.send(result);
+      res.send(JSON.stringify({ todos: result }));
     });
   }
 });
@@ -93,8 +93,8 @@ app.get('/posts', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('counts').find(function(err, result) {
-      res.send(result);
+    db.collection('todos').find(function(err, result) {
+      res.send(JSON.stringify({ todos: result }));
     });
   }
 });
