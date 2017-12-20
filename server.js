@@ -68,6 +68,26 @@ app.get('/pagecount', function (req, res) {
   res.send('{ pageCount: 0 }');
 });
 
+app.get('/api/todos', function (req, res) {
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('todos').find(function(err, result) {
+      res.send(result);
+    });
+  }
+});
+
+app.post('/api/todos', function (req, res) {
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('todos').insert(req.body.formData);
+  }
+});
+
 app.get('/posts', function (req, res) {
   if (!db) {
     initDb(function(err){});
