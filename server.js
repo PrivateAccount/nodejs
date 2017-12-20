@@ -65,7 +65,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
-  res.send('{ pageCount: 0 }');
+  res.sendStatus(200);
 });
 
 app.get('/api/todos', function (req, res) {
@@ -89,9 +89,12 @@ app.post('/api/todos', function (req, res) {
 	var myObj = { text: req.body.text, ip: req.ip, date: Date.now() };
 	db.collection('todos').insertOne(myObj, function(err, res) {
 		if (err) throw err;
-		res.send(res);
-		console.log("1 document inserted");
     });
+	db.collection('todos', function(err, collection) {
+		collection.find().toArray(function(err, items) {
+			res.send(items);
+		});
+	});
   }
 });
 
