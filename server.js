@@ -74,7 +74,7 @@ app.get('/api/todos', function (req, res) {
   }
   if (db) {
     db.collection('todos').find(function(err, result) {
-      res.send(result);
+      res.send(JSON.stringify(result));
     });
   }
 });
@@ -84,7 +84,7 @@ app.post('/api/todos', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('todos').insert(req.body.formData);
+    db.collection('todos').insert({ text: 'ToDo content user text', ip: req.ip, date: Date.now() });
   }
 });
 
