@@ -89,11 +89,7 @@ app.post('/api/todos', function (req, res) {
 	var myObj = { text: req.body.text, ip: req.ip, date: Date.now() };
 	db.collection('todos').insertOne(myObj, function(err, res) {
 		if (err) throw err;
-		db.collection('todos', function(err, collection) {
-			collection.find().toArray(function(err, items) {
-				res.send(items);
-			});
-		});
+		res.send(res);
 		console.log("1 document inserted");
     });
   }
