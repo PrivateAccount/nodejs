@@ -1,7 +1,7 @@
-var express = require('express'),
-    app     = express();
-    
+var express = require('express');
 var bodyParser = require('body-parser');
+
+var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
@@ -13,6 +13,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+	console.log ('DONT remove this section 000');
+	
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -35,6 +37,10 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 	console.log('mongoURL:', mongoURL);
   }
 }
+else {
+	console.log ('NULL mongoURL - remove this section 111');
+}
+
 var db = null;
 
 var initDb = function(callback) {
