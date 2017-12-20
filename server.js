@@ -1,20 +1,25 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-
-var app = express();
-
+var express = require('express'),
+    app     = express(),
+    morgan  = require('morgan');
+	
+var bodyParser = require('body-parser');	
+    
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+Object.assign=require('object-assign')
+
+app.engine('html', require('ejs').renderFile);
+app.use(morgan('combined'))
+
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    mongoURLLabel = "";
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
-	console.log ('DONT remove this section 000');
-	
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -22,29 +27,22 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
       mongoPassword = process.env[mongoServiceName + '_PASSWORD']
       mongoUser = process.env[mongoServiceName + '_USER'];
 
-		console.log('mongoServiceName:', mongoServiceName);
-		console.log('mongoHost:', mongoHost);
-		console.log('mongoPort:', mongoPort);
-		console.log('mongoDatabase:', mongoDatabase);
-		console.log('mongoUser:', mongoUser);
-		console.log('mongoPassword:', mongoPassword);
-	  
   if (mongoHost && mongoPort && mongoDatabase) {
+    mongoURLLabel = mongoURL = 'mongodb://';
     if (mongoUser && mongoPassword) {
       mongoURL += mongoUser + ':' + mongoPassword + '@';
     }
+    mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
-	console.log('mongoURL:', mongoURL);
   }
 }
-else {
-	console.log ('NULL mongoURL - remove this section 111');
-}
 
-var db = null;
+var db = null,
+    dbDetails = new Object();
 
 var initDb = function(callback) {
   if (mongoURL == null) return;
+
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
@@ -53,7 +51,13 @@ var initDb = function(callback) {
       callback(err);
       return;
     }
+
     db = conn;
+    dbDetails.databaseName = db.databaseName;
+    dbDetails.url = mongoURLLabel;
+    dbDetails.type = 'MongoDB';
+
+    console.log('Connected to MongoDB at: %s', mongoURL);
   });
 };
 
@@ -66,7 +70,7 @@ app.get('/', function (req, res) {
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) {
-        console.log('Error running count. Message:\n' + err);
+        console.log('Error running count. Message:\n'+err);
       }
       res.sendFile('index.html');
     });
@@ -98,7 +102,6 @@ initDb(function(err){
 });
 
 app.listen(port, ip);
-
 console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
