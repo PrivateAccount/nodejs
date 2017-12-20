@@ -87,7 +87,7 @@ app.post('/api/todos', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('todos').insert({ text: 'ToDo content user text', ip: req.ip, date: Date.now() });
+    db.collection('todos').insert({ text: req.body.formData.text, ip: req.ip, date: Date.now() });
   }
 });
 
