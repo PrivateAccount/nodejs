@@ -70,7 +70,7 @@ app.get('/', function (req, res) {
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) {
-        console.log('Error running count. Message:\n'+err);
+        console.log('Error running count. Message:\n' + err);
       }
       res.sendFile('index.html');
     });
@@ -79,16 +79,14 @@ app.get('/', function (req, res) {
   }
 });
 
-app.get('/pagecount', function (req, res) {
+app.get('/posts', function (req, res) {
   if (!db) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('counts').find(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
+    db.collection('counts').find(function(err, result) {
+      res.send(result);
     });
-  } else {
-    res.send('{ pageCount: -1 }');
   }
 });
 

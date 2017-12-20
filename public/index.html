@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script src="app.js"></script>
 </head>
 <body ng-controller="mainController">
     <div class="container">
         <div class="text-center">
             <h1>Todo List</h1>
+			<h2>Posts:</h2>
+			<div ng-repeat="post in posts">
+				{{ post.ip }} : {{ post.date }}
+			</div>
         </div>
         <div id="todo-list" class="row">
             <div class="col-sm-4 col-sm-offset-4">
