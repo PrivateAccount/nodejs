@@ -36,4 +36,4 @@ function mainController($scope, $http) {
             });
     };
 
-}
+};
