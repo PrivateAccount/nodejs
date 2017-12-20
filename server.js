@@ -74,6 +74,7 @@ app.get('/api/todos', function (req, res) {
   }
   if (db) {
     db.collection('todos').find(function(err, result) {
+      res.setHeader('Content-Type', 'application/json');		
       res.send(JSON.stringify({ todos: result }));
     });
   }
@@ -94,6 +95,7 @@ app.get('/posts', function (req, res) {
   }
   if (db) {
     db.collection('todos').find(function(err, result) {
+      res.setHeader('Content-Type', 'application/json');		
       res.send(JSON.stringify({ todos: result }));
     });
   }
