@@ -74,7 +74,7 @@ app.get('/api/todos', function (req, res) {
   }
   if (db) {
     db.collection('todos').find(function(err, result) {
-      res.send('GET /api/todos find();');
+      res.send(result);
     });
   }
 });

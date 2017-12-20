@@ -7,10 +7,10 @@ function mainController($scope, $http) {
     $http.get('/api/todos')
         .success(function(data) {
             $scope.todos = data;
-            console.log(data);
+            console.log('From browser 1: ', data);
         })
         .error(function(data) {
-            console.log('Error: ' + data);
+            console.log('From browser 1 Error: ' + data);
         });
 
     $scope.createTodo = function() {
@@ -18,10 +18,10 @@ function mainController($scope, $http) {
             .success(function(data) {
                 $scope.formData = {};
                 $scope.todos = data;
-                console.log(data);
+                console.log('From browser 2: ', data);
             })
             .error(function(data) {
-                console.log('Error: ' + data);
+                console.log('From browser 2 Error: ' + data);
             });
     };
 
@@ -29,10 +29,10 @@ function mainController($scope, $http) {
         $http.delete('/api/todos/' + id)
             .success(function(data) {
                 $scope.todos = data;
-                console.log(data);
+                console.log('From browser 3: ', data);
             })
             .error(function(data) {
-                console.log('Error: ' + data);
+                console.log('From browser 3 Error: ' + data);
             });
     };
 
