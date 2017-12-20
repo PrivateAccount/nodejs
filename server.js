@@ -87,18 +87,9 @@ app.post('/api/todos', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('todos').insert({ text: req.body.formData.text, ip: req.ip, date: Date.now() });
-  }
-});
-
-app.get('/posts', function (req, res) {
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    db.collection('todos').find(function(err, result) {
-      res.send('GET /posts find();');
-    });
+	  console.log('Przyszlo do serwera:', req.body);
+	  var inputText = req.body.formData.text;
+    db.collection('todos').insert({ text: inputText, ip: req.ip, date: Date.now() });
   }
 });
 

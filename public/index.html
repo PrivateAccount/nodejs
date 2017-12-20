@@ -15,12 +15,11 @@
 <body ng-controller="mainController">
     <div class="container">
         <div class="text-center">
-            <h1>Todo List</h1>
-			<a href="/api/todos" class="btn btn-success">Wczytaj</a>
+            <h1>Todo List <a href="/api/todos" class="btn btn-primary">Wczytaj</a></h1>
         </div>
         <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-				<table class="table">
+            <div class="col-lg-8 col-lg-offset-2">
+				<table class="table table-bordered">
 					<tr>
 						<th>Id</th>
 						<th>IP</th>
@@ -36,8 +35,8 @@
 						<td>{{ todo.date }}</td>
 						<td>{{ todo.$$hashKey }}</td>
 						<td>
-							<button class="btn btn-success" ng-click="editTodo(todo._id)">
-							<button class="btn btn-danger" ng-click="deleteTodo(todo._id)">
+							<button class="btn btn-success" ng-click="editTodo(todo._id)">Edit</button>
+							<button class="btn btn-danger" ng-click="deleteTodo(todo._id)">Delete</button>
 						</td>
 					</tr>
 				</table>
