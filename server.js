@@ -87,7 +87,7 @@ app.get('/api/todo/:id', function (req, res) {
     if (db) {
         db.collection('todos', function (err, collection) {
             collection.findOne({
-                _id: req.params.id
+                "_id": req.params.id
             }, function (err, document) {
                 res.send(document);
             });
@@ -127,7 +127,7 @@ app.put('/api/todo/:id', function (req, res) {
             date: Date.now()
         };
         db.collection('todos').updateOne({
-            _id: req.params.id
+            "_id": req.params.id
         }, myObj, function (err, res) {
             if (err) throw err;
         });
@@ -145,7 +145,7 @@ app.delete('/api/todo/:id', function (req, res) {
     }
     if (db) {
         db.collection('todos').remove({
-            _id: req.params.id
+            "_id": req.params.id
         }, function (err, res) {
             if (err) throw err;
         });
