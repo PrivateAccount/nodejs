@@ -86,10 +86,10 @@ app.get('/api/todo/:id', function (req, res) {
     }
     if (db) {
         db.collection('todos', function (err, collection) {
-            collection.find({
+            collection.findOne({
                 _id: req.params.id
-            }).toArray(function (err, items) {
-                res.send(items);
+            }, function (err, document) {
+                res.send(document);
             });
         });
     }
@@ -126,9 +126,27 @@ app.put('/api/todo/:id', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').update({
+        db.collection('todos').updateOne({
             _id: req.params.id
         }, myObj, function (err, res) {
+            if (err) throw err;
+        });
+        db.collection('todos', function (err, collection) {
+            collection.find().toArray(function (err, items) {
+                res.send(items);
+            });
+        });
+    }
+});
+
+app.delete('/api/todo/:id', function (req, res) {
+    if (!db) {
+        initDb(function (err) {});
+    }
+    if (db) {
+        db.collection('todos').remove({
+            _id: req.params.id
+        }, function (err, res) {
             if (err) throw err;
         });
         db.collection('todos', function (err, collection) {
