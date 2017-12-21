@@ -1,8 +1,9 @@
-var express = require('express'),
-    app = express(),
-    morgan = require('morgan');
-
+var express = require('express');
+var morgan = require('morgan');
+var mongodb = require('mongodb');
 var bodyParser = require('body-parser');
+
+var app = express();
 
 Object.assign = require('object-assign');
 
@@ -43,10 +44,6 @@ var db = null,
 var ObjectID = require('mongodb').ObjectID;
 
 var initDb = function (callback) {
-    if (mongoURL == null) return;
-    var mongodb = require('mongodb');
-    if (mongodb == null) return;
-
     mongodb.connect(mongoURL, function (err, conn) {
         if (err) {
             callback(err);
@@ -123,14 +120,12 @@ app.put('/api/todo/:id', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').update({
+        db.collection('todos').updateOne({
             _id: new ObjectID(req.params.id)
         }, {
             $set: myObj
-        }, function (err, result) {
-            if (err) throw err;
-            res.send(result);
         });
+        res.sendStatus(200);
     }
 });
 
