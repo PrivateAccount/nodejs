@@ -8,13 +8,14 @@ body {
 .table-bordered>tfoot>tr>th {
     font-size: 1.0em;
     padding: 15px 8px;
-    background: #def;
+    background-color: #def;
 }
 .table-bordered>thead>tr>td,
 .table-bordered>tbody>tr>td,
 .table-bordered>tfoot>tr>td {
     font-size: 0.9em;
     padding: 8px 8px;
+    vertical-align: middle;
 }
 button.action {
     width: 50px;

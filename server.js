@@ -86,11 +86,10 @@ app.get('/api/todo/:id', function (req, res) {
     }
     if (db) {
         db.collection('todos', function (err, collection) {
-            collection.findOne({
+            var document = collection.find({
                 _id: req.params.id
-            }, function (document, error) {
-                res.send(document);
             });
+            res.send(document);
         });
     }
 });
@@ -108,11 +107,7 @@ app.post('/api/todos', function (req, res) {
         db.collection('todos').insertOne(myObj, function (err, res) {
             if (err) throw err;
         });
-        db.collection('todos', function (err, collection) {
-            collection.find().toArray(function (err, items) {
-                res.send(items);
-            });
-        });
+        res.sendStatus(200);
     }
 });
 
@@ -131,11 +126,7 @@ app.put('/api/todo/:id', function (req, res) {
         }, myObj, function (err, res) {
             if (err) throw err;
         });
-        db.collection('todos', function (err, collection) {
-            collection.find().toArray(function (err, items) {
-                res.send(items);
-            });
-        });
+        res.sendStatus(200);
     }
 });
 
@@ -149,11 +140,7 @@ app.delete('/api/todo/:id', function (req, res) {
         }, function (err, res) {
             if (err) throw err;
         });
-        db.collection('todos', function (err, collection) {
-            collection.find().toArray(function (err, items) {
-                res.send(items);
-            });
-        });
+        res.sendStatus(200);
     }
 });
 
