@@ -123,7 +123,7 @@ app.put('/api/todo/:id', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').updateOne({
+        db.collection('todos').update({
             _id: new ObjectID(req.params.id)
         }, {
             $set: myObj
