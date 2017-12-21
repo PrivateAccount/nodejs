@@ -8,11 +8,8 @@ function mainController($scope, $http) {
         $http.get('/api/todos')
             .success(function (data) {
                 $scope.todos = data;
-                console.log('From browser 1: ', data);
             })
-            .error(function (data) {
-                console.log('From browser 1 Error: ' + data);
-            });
+            .error(function (data) {});
     };
 
     $scope.createTodo = function () {
@@ -20,22 +17,16 @@ function mainController($scope, $http) {
             .success(function () {
                 $scope.formData = {};
                 $scope.getTodos();
-                console.log('From browser 2: OK');
             })
-            .error(function () {
-                console.log('From browser 2 Error');
-            });
+            .error(function () {});
     };
 
     $scope.editTodo = function (id) {
         $http.get('/api/todo/' + id)
             .success(function (data) {
                 $scope.formData = data;
-                console.log('From browser 5: ', data);
             })
-            .error(function (data) {
-                console.log('From browser 5 Error: ' + data);
-            });
+            .error(function (data) {});
     };
 
     $scope.updateTodo = function (id) {
@@ -43,22 +34,16 @@ function mainController($scope, $http) {
             .success(function () {
                 $scope.formData = {};
                 $scope.getTodos();
-                console.log('From browser 4: OK');
             })
-            .error(function () {
-                console.log('From browser 4 Error');
-            });
+            .error(function () {});
     };
 
     $scope.deleteTodo = function (id) {
         $http.delete('/api/todo/' + id)
             .success(function () {
                 $scope.getTodos();
-                console.log('From browser 3: OK');
             })
-            .error(function () {
-                console.log('From browser 3 Error');
-            });
+            .error(function () {});
     };
 
     $scope.getTodos();

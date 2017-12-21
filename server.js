@@ -106,7 +106,7 @@ app.post('/api/todos', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').insert(myObj, function (err, result) {
+        db.collection('todos').insertOne(myObj, function (err, result) {
             if (err) throw err;
             res.send(result);
         });
@@ -123,8 +123,8 @@ app.put('/api/todo/:id', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').update({
-            _id: req.params.id
+        db.collection('todos').updateOne({
+            _id: new ObjectID(req.params.id)
         }, myObj, function (err, result) {
             if (err) throw err;
             res.send(result);
@@ -137,8 +137,8 @@ app.delete('/api/todo/:id', function (req, res) {
         initDb(function (err) {});
     }
     if (db) {
-        db.collection('todos').remove({
-            _id: req.params.id
+        db.collection('todos').removeOne({
+            _id: new ObjectID(req.params.id)
         }, function (err, result) {
             if (err) throw err;
             res.send(result);
