@@ -15,7 +15,9 @@
 <body ng-controller="mainController">
     <div class="container">
         <div class="text-center">
-            <h1>Todo List</h1>
+            <h1>MEAN Stack Application</h1>
+            <h2>MongoDB + Express + Angular + Node</h2>
+            <h3>Todo List</h3>
         </div>
         <div id="todo-list" class="row">
             <div class="col-lg-10 col-lg-offset-1">
@@ -35,10 +37,10 @@
                         <td>{{ todo.date }}</td>
                         <td>{{ todo.$$hashKey }}</td>
                         <td>
-                            <button class="btn btn-warning btn-sm" ng-click="editTodo(todo._id)">Edit</button>
+                            <button class="btn btn-warning btn-xs" ng-click="editTodo(todo._id)">Edit</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" ng-click="deleteTodo(todo._id)">Delete</button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteTodo(todo._id)">Delete</button>
                         </td>
                     </tr>
                 </table>
@@ -48,7 +50,7 @@
             <div class="col-lg-10 col-lg-offset-1">
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Input any text..." ng-model="formData.text">
+                        <input type="text" class="form-control input-md" placeholder="Input any text..." ng-model="formData.text">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Add</button>
                 </form>
