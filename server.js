@@ -40,6 +40,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
 var db = null,
     dbDetails = new Object();
+var ObjectID = require('mongodb').ObjectID;
 
 var initDb = function (callback) {
     if (mongoURL == null) return;
@@ -86,7 +87,9 @@ app.get('/api/todo/:id', function (req, res) {
     }
     if (db) {
         db.collection('todos', function (err, collection) {
-            collection.find(req.params.id).toArray(function (err, result) {
+            collection.findOne({
+                _id: new ObjectID(req.params.id)
+            }, function (err, result) {
                 res.send(result);
             });
         });
