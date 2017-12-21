@@ -73,8 +73,8 @@ app.get('/api/todos', function (req, res) {
     }
     if (db) {
         db.collection('todos', function (err, collection) {
-            collection.find().toArray(function (err, items) {
-                res.send(items);
+            collection.find().toArray(function (err, result) {
+                res.send(result);
             });
         });
     }
@@ -86,10 +86,11 @@ app.get('/api/todo/:id', function (req, res) {
     }
     if (db) {
         db.collection('todos', function (err, collection) {
-            var document = collection.find({
+            collection.find({
                 _id: req.params.id
+            }, function (err, result) {
+                res.send(result);
             });
-            res.send(document);
         });
     }
 });
@@ -104,10 +105,10 @@ app.post('/api/todos', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').insertOne(myObj, function (err, res) {
+        db.collection('todos').insert(myObj, function (err, result) {
             if (err) throw err;
+            res.send(result);
         });
-        res.sendStatus(200);
     }
 });
 
@@ -121,12 +122,12 @@ app.put('/api/todo/:id', function (req, res) {
             ip: req.ip,
             date: Date.now()
         };
-        db.collection('todos').updateOne({
+        db.collection('todos').update({
             _id: req.params.id
-        }, myObj, function (err, res) {
+        }, myObj, function (err, result) {
             if (err) throw err;
+            res.send(result);
         });
-        res.sendStatus(200);
     }
 });
 
@@ -135,12 +136,12 @@ app.delete('/api/todo/:id', function (req, res) {
         initDb(function (err) {});
     }
     if (db) {
-        db.collection('todos').removeOne({
+        db.collection('todos').remove({
             _id: req.params.id
-        }, function (err, res) {
+        }, function (err, result) {
             if (err) throw err;
+            res.send(result);
         });
-        res.sendStatus(200);
     }
 });
 

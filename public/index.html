@@ -48,20 +48,18 @@
         </div>
         <div id="todo-form" class="row">
             <div class="col-lg-6">
-                <h4>New item</h4>
                 <form>
                     <div class="form-group">
-                        <label>Description:</label>
+                        <label>New item:</label>
                         <input type="text" class="form-control input-md" ng-model="formData.text">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Insert</button>
                 </form>
             </div>
             <div class="col-lg-6">
-                <h4>Edit item</h4>
                 <form>
                     <div class="form-group">
-                        <label>Description:</label>
+                        <label>Edit item:</label>
                         <input type="text" class="form-control input-md" ng-model="formData.text">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" ng-click="updateTodo(formData.id)">Update</button>
@@ -70,7 +68,7 @@
         </div>
         <hr>
         <div class="text-center">
-            Stats: Items = <b>{{ todos.length }}</b>
+            Stats: <b>{{ todos.length }}</b> rows
         </div>
         <hr>
         <div class="footer text-center">
