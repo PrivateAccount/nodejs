@@ -1,4 +1,4 @@
-var scotchTodo = angular.module('scotchTodo', []);
+var myApp = angular.module('myApp', []);
 
 function mainController($scope, $http) {
 	
