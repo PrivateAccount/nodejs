@@ -18,18 +18,18 @@
         <div class="text-center">
             <h1>MEAN Stack Application</h1>
             <h2>MongoDB + Express + Angular + Node</h2>
-            <h3>Todo List</h3>
+            <h3>Items List</h3>
         </div>
         <div id="todo-list" class="row">
             <div class="col-lg-10 col-lg-offset-1">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
                     <tr>
                         <th>Id</th>
                         <th>IP</th>
                         <th>Message</th>
                         <th>Date</th>
                         <th>Hash</th>
-                        <th colspan="2">Action</th>
+                        <th colspan="2" class="text-center">Action</th>
                     </tr>
                     <tr ng-repeat="todo in todos">
                         <td>{{ todo._id }}</td>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div id="todo-form" class="row">
-            <div class="col-lg-5 col-lg-offset-left-1">
+            <div class="col-lg-6 col-lg-offset-right-1">
                 <h3>New item</h3>
                 <form>
                     <div class="form-group">
@@ -58,7 +58,7 @@
                     <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Insert</button>
                 </form>
             </div>
-            <div class="col-lg-5 col-lg-offset-right-1">
+            <div class="col-lg-6 col-lg-offset-left-1">
                 <h3>Edit item</h3>
                 <form>
                     <div class="form-group">
@@ -68,6 +68,10 @@
                     <button type="submit" class="btn btn-primary btn-block" ng-click="updateTodo(formData.id)">Update</button>
                 </form>
             </div>
+        </div>
+        <hr>
+        <div class="footer text-center">
+            <h4>&copy; 2017 <a href="http://andrzej-zukowski.com.pl" target="_blank">Andrzej Żukowski</a></h4>
         </div>
     </div>
 </body>

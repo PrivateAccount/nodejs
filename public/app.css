@@ -3,6 +3,11 @@ body {
     padding: 0;
     color: #777;
 }
-div#todo-form {
-    padding: 10px 0;
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    font-size: 0.9em;
 }
