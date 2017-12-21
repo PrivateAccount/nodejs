@@ -18,7 +18,6 @@
         <div class="text-center">
             <h1>MEAN Stack Application</h1>
             <h2>MongoDB + Express + Angular + Node</h2>
-            <h3>Items List</h3>
         </div>
         <div id="todo-list" class="row">
             <div class="col-lg-10 col-lg-offset-1">
@@ -35,21 +34,21 @@
                         <td>{{ todo._id }}</td>
                         <td>{{ todo.ip }}</td>
                         <td>{{ todo.text }}</td>
-                        <td>{{ todo.date }}</td>
+                        <td>{{ todo.date | date: "dd.MM.yyyy" }}</td>
                         <td>{{ todo.$$hashKey }}</td>
                         <td>
-                            <button class="btn btn-warning btn-xs" ng-click="editTodo(todo._id)">Edit</button>
+                            <button class="btn btn-warning btn-xs action" ng-click="editTodo(todo._id)">Edit</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-xs" ng-click="deleteTodo(todo._id)">Delete</button>
+                            <button class="btn btn-danger btn-xs action" ng-click="deleteTodo(todo._id)">Delete</button>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
         <div id="todo-form" class="row">
-            <div class="col-lg-6 col-lg-offset-right-1">
-                <h3>New item</h3>
+            <div class="col-lg-5 col-lg-offset-right-1">
+                <h4>New item</h4>
                 <form>
                     <div class="form-group">
                         <label>Description:</label>
@@ -58,8 +57,8 @@
                     <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Insert</button>
                 </form>
             </div>
-            <div class="col-lg-6 col-lg-offset-left-1">
-                <h3>Edit item</h3>
+            <div class="col-lg-5 col-lg-offset-left-1">
+                <h4>Edit item</h4>
                 <form>
                     <div class="form-group">
                         <label>Description:</label>
@@ -71,7 +70,7 @@
         </div>
         <hr>
         <div class="footer text-center">
-            <h4>&copy; 2017 <a href="http://andrzej-zukowski.com.pl" target="_blank">Andrzej Żukowski</a></h4>
+            <h5>&copy; 2017 <a href="http://andrzej-zukowski.com.pl" target="_blank">Andrzej Żukowski</a></h5>
         </div>
     </div>
 </body>
