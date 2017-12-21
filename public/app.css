@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #777;
+}
+div#todo-form {
+    padding: 10px 0;
+}

@@ -80,6 +80,21 @@ app.get('/api/todos', function (req, res) {
     }
 });
 
+app.get('/api/todo/:id', function (req, res) {
+    if (!db) {
+        initDb(function (err) {});
+    }
+    if (db) {
+        db.collection('todos', function (err, collection) {
+            collection.find({
+                _id: req.params.id
+            }).toArray(function (err, items) {
+                res.send(items);
+            });
+        });
+    }
+});
+
 app.post('/api/todos', function (req, res) {
     if (!db) {
         initDb(function (err) {});
@@ -91,6 +106,29 @@ app.post('/api/todos', function (req, res) {
             date: Date.now()
         };
         db.collection('todos').insertOne(myObj, function (err, res) {
+            if (err) throw err;
+        });
+        db.collection('todos', function (err, collection) {
+            collection.find().toArray(function (err, items) {
+                res.send(items);
+            });
+        });
+    }
+});
+
+app.put('/api/todo/:id', function (req, res) {
+    if (!db) {
+        initDb(function (err) {});
+    }
+    if (db) {
+        var myObj = {
+            text: req.body.text,
+            ip: req.ip,
+            date: Date.now()
+        };
+        db.collection('todos').update({
+            _id: req.params.id
+        }, myObj, function (err, res) {
             if (err) throw err;
         });
         db.collection('todos', function (err, collection) {

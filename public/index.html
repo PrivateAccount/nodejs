@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NodeJS based on Angular App</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="app.js"></script>
@@ -47,12 +48,24 @@
             </div>
         </div>
         <div id="todo-form" class="row">
-            <div class="col-lg-10 col-lg-offset-1">
+            <div class="col-lg-4 col-lg-offset-1">
+                <h3>New item</h3>
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control input-md" placeholder="Input any text..." ng-model="formData.text">
+                        <label>Description:</label>
+                        <input type="text" class="form-control input-md" ng-model="formData.text">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Add</button>
+                    <button type="submit" class="btn btn-primary btn-block" ng-click="createTodo()">Insert</button>
+                </form>
+            </div>
+            <div class="col-lg-4 col-lg-offset-1">
+                <h3>Edit item</h3>
+                <form>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <input type="text" class="form-control input-md" ng-model="formData.text">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" ng-click="updateTodo(formData.id)">Update</button>
                 </form>
             </div>
         </div>
