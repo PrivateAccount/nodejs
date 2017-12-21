@@ -30,7 +30,7 @@ function mainController($scope, $http) {
     };
 
     $scope.updateTodo = function (id) {
-        $http.put('/api/todo/' + id, $scope.formData)
+        $http.put('/api/todo/:id', $scope.formData)
             .success(function () {
                 $scope.formData = {};
                 $scope.getTodos();

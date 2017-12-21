@@ -118,6 +118,7 @@ app.put('/api/todo/:id', function (req, res) {
         initDb(function (err) {});
     }
     if (db) {
+        console.log(req.params);
         db.collection('todos').updateOne({
             _id: new ObjectID(req.params.id)
         }, {
