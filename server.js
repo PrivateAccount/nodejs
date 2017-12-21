@@ -118,15 +118,11 @@ app.put('/api/todo/:id', function (req, res) {
         initDb(function (err) {});
     }
     if (db) {
-        var myObj = {
+        db.collection('todos').save({
+            _id: new ObjectID(req.params.id),
             text: req.body.text,
             ip: req.ip,
             date: Date.now()
-        };
-        db.collection('todos').update({
-            _id: new ObjectID(req.params.id)
-        }, {
-            $set: myObj
         });
     }
 });
