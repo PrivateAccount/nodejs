@@ -88,7 +88,7 @@ app.get('/api/todo/:id', function (req, res) {
         db.collection('todos', function (err, collection) {
             collection.find({
                 _id: req.params.id
-            }, function (err, result) {
+            }).toArray(function (err, result) {
                 res.send(result);
             });
         });
