@@ -60,6 +60,10 @@ var initDb = function (callback) {
     });
 };
 
+app.get('/pagecount', function (req, res) {
+    res.sendStatus(200);
+});
+
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
