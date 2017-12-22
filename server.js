@@ -64,10 +64,6 @@ app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
 
-app.get('/pagecount', function (req, res) {
-    res.sendStatus(200);
-});
-
 app.get('/api/todos', function (req, res) {
     if (!db) {
         initDb(function (err) {});
